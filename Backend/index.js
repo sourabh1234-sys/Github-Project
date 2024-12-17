@@ -11,6 +11,12 @@ const { Server } = require('socket.io');
 
 dotenv.config();
 
+app.use(cors({ 
+  origin: 'https://github-project-rosy.vercel.app',  
+  methods: ['GET', 'POST'], 
+}));
+
+
 
 const {hideBin} = require('yargs/helpers')
 const {init} = require('./Controller/init');
@@ -75,15 +81,17 @@ function start() {
     app.use('/' , userrouter )
     app.use('/' , reporouter)
 
+    app.options('*', cors({ origin: 'https://github-project-rosy.vercel.app' }));
+
 
 
     const httpServer = http.createServer(app);
     const io = new Server(httpServer , {
         cors: {
-            origin: "*",
-            methods: ["GET" , "POST"],
-        }
-    })
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
     io.on("connection" , (socket) => {
         socket.on("joinroom" , (userid) => {
