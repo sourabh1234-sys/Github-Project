@@ -11,10 +11,7 @@ const { Server } = require('socket.io');
 
 dotenv.config();
 
-app.use(cors({ 
-  origin: 'https://github-project-rosy.vercel.app',  
-  methods: ['GET', 'POST'], 
-}));
+
 
 
 
@@ -81,7 +78,7 @@ function start() {
     app.use('/' , userrouter )
     app.use('/' , reporouter)
 
-    app.options('*', cors({ origin: 'https://github-project-rosy.vercel.app' }));
+   
 
 
 
